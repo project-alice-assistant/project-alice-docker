@@ -1,4 +1,4 @@
-# Using the composer file
+# Project Alice's Docker
 
 ## How to configure Alice
 
