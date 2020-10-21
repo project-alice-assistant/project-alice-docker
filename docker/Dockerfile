@@ -52,6 +52,10 @@ RUN set -x && \
         mv /systemctl /usr/bin/systemctl && \
         chmod +x /usr/bin/systemctl
 
+RUN set -x && \
+        cd /home && \
+        ln -s /root root
+
 EXPOSE 1883/tcp
 
 
