@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG_FILE_PATH="/home/pi/ProjectAlice/config.json"
+CONFIG_FILE_PATH="/root/ProjectAlice/config.json"
 
 # Load the config json file ready for editing
 CONFIG_JSON=`cat ${CONFIG_FILE_PATH}`
