@@ -11,7 +11,7 @@ You can run Alice headless very simply using the following docker-compose file:
 version: "2"
 services:
   alice-base:
-    image: project-alice-local:latest
+    image: assistantprojectalice/main-unit:latest
     container_name: alice-base
     network_mode: host
     environment:
