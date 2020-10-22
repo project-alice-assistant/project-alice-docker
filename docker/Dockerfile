@@ -29,15 +29,13 @@ RUN set -x && \
         . ~/.bashrc && \
         python3.7 main.py
 
-RUN pip3 uninstall setuptools -y
-RUN pip3 install setuptools
-
 ADD ./resources/initializer.py /initializer.py
 
 RUN echo -e '#!/bin/bash\necho hello "$@" >> /services-to-start.config' > /usr/bin/systemctl && \
         chmod +x /usr/bin/systemctl
 
 RUN set -x && \
+        SETUPTOOLS_USE_DISTUTILS=stdlib && \
         cd ~/ProjectAlice/ && \
         cp /initializer.py ~/ProjectAlice/ && \
         ./venv/bin/python initializer.py && \
