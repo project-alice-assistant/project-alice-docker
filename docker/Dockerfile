@@ -35,7 +35,7 @@ RUN echo -e '#!/bin/bash\necho hello "$@" >> /services-to-start.config' > /usr/b
         chmod +x /usr/bin/systemctl
 
 RUN set -x && \
-        sudo python3 -m pip3 install setuptools-rust && \
+        sudo python3.7 -m pip install setuptools-rust && \
         cd ~/ProjectAlice/ && \
         cp /initializer.py ~/ProjectAlice/ && \
         ./venv/bin/python initializer.py && \
