@@ -9,7 +9,7 @@ jobs:
       DOCKER_REGISTRY: docker.io
       DOCKER_IMAGE: assistantprojectalice/main-unit
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
       DOCKER_TARGET_PLATFORM: linux/arm/v7
     steps:
     - name: Checkout the code
