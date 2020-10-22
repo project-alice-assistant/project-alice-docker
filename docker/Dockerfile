@@ -1,4 +1,4 @@
-FROM wraithrmm/python-enabled-pi-os:latest
+FROM python:3.7-buster
 
 #Change the timezone to your current timezone!!
 ENV TZ=Europe/London
@@ -17,10 +17,16 @@ RUN set -x && \
 	git clone https://github.com/project-alice-assistant/ProjectAlice.git
 
 RUN set -x && \
+        apt-get install -y sudo
+
+RUN set -x && \
         sudo pip3 install psutil
 
 RUN set -x && \
         sudo pip3 install pyyaml
+
+RUN set -x && \
+        pip3 install toml
 
 ADD ./resources/ProjectAlice.yaml /boot/ProjectAlice.yaml
 
@@ -33,6 +39,18 @@ ADD ./resources/initializer.py /initializer.py
 
 RUN echo -e '#!/bin/bash\necho hello "$@" >> /services-to-start.config' > /usr/bin/systemctl && \
         chmod +x /usr/bin/systemctl
+
+RUN set -x && \
+        sudo pip3 install psutil
+        
+RUN set -x && \
+        sudo pip3 install pyyaml
+
+RUN set -x && \
+        pip3.7 install virtualenv
+
+RUN set -x && \
+        echo "alias python3='python3.7'\nalias pip='pip3.7'" >> ~/.bashrc
 
 RUN set -x && \
         cd ~/ProjectAlice/ && \
