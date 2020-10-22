@@ -29,7 +29,7 @@ RUN set -x && \
         . ~/.bashrc && \
         python3.7 main.py
 
-RUN pip3 uninstall setuptools
+RUN pip3 uninstall setuptools -y
 RUN pip3 install setuptools
 
 ADD ./resources/initializer.py /initializer.py
