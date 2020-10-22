@@ -29,7 +29,8 @@ RUN set -x && \
         . ~/.bashrc && \
         python3.7 main.py
 
-RUN pip3 install --upgrade pip==20.0.2 wheel==0.34.2 setuptools==49.6.0
+RUN pip3 uninstall setuptools
+RUN pip3 install setuptools
 
 ADD ./resources/initializer.py /initializer.py
 
