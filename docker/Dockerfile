@@ -30,15 +30,15 @@ RUN set -x && \
 
 ADD ./resources/ProjectAlice.yaml /boot/ProjectAlice.yaml
 
+RUN echo -e '#!/bin/bash\necho hello "$@" >> /services-to-start.config' > /usr/bin/systemctl && \
+        chmod +x /usr/bin/systemctl
+
 RUN set -x && \
         cd ~/ProjectAlice/ && \
         . ~/.bashrc && \
         python3.7 main.py
 
 ADD ./resources/initializer.py /initializer.py
-
-RUN echo -e '#!/bin/bash\necho hello "$@" >> /services-to-start.config' > /usr/bin/systemctl && \
-        chmod +x /usr/bin/systemctl
 
 RUN set -x && \
         sudo pip3 install psutil
@@ -59,7 +59,7 @@ RUN set -x && \
         cat /services-to-start.config
 
 RUN set -x && \
-        sudo apt-get install jq
+        sudo apt-get install jq -y
 
 ADD ./resources/start-alice.sh /start-alice.sh
 ADD ./resources/update-alice-config-from-environment-vars.sh /update-alice-config-from-environment-vars.sh
