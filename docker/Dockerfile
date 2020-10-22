@@ -74,6 +74,11 @@ RUN set -x && \
         chmod +x /usr/bin/systemctl
 
 RUN set -x && \
+        apt-get clean && \
+        apt-get -y auto-remove && \
+        rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN set -x && \
         cd /home && \
         ln -s /root root
 
