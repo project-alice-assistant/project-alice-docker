@@ -34,6 +34,9 @@ RUN echo -e '#!/bin/bash\necho hello "$@" >> /services-to-start.config' > /usr/b
         chmod +x /usr/bin/systemctl
 
 RUN set -x && \
+        pip3 install setuptools-rust
+
+RUN set -x && \
         cd ~/ProjectAlice/ && \
         . ~/.bashrc && \
         python3.7 main.py
