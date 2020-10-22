@@ -10,7 +10,7 @@ RUN set -x && \
 	apt-get update && apt-get upgrade -y --allow-unauthenticated && apt-get dist-upgrade -y --allow-unauthenticated
 
 RUN set -x && \	
-	apt-get install -y git python3-toml
+	apt-get install -y git python3-toml gcc python3-dev
 
 RUN set -x && \
         cd ~/ && \
