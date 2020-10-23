@@ -44,7 +44,7 @@ services:
     restart: unless-stopped
 ```
 
-## How to run the Beta
+### How to run the Beta
 
 This is very simple, just pull the dev tag as follows:
 
