@@ -3,25 +3,32 @@ FROM python:3.7-slim-buster
 #Change the timezone to your current timezone!!
 ENV TZ=Europe/London
 
-RUN set -x ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN set -x && \
+        ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN set -x apt-get update && apt-get upgrade -y --allow-unauthenticated && apt-get dist-upgrade -y --allow-unauthenticated
+RUN set -x && \
+        apt-get update && apt-get upgrade -y --allow-unauthenticated && apt-get dist-upgrade -y --allow-unauthenticated
 
-RUN set -x apt-get install -y git python3-toml gcc python3-dev wget sudo jq
+RUN set -x && \
+        apt-get install -y git python3-toml gcc python3-dev wget sudo jq
 
 RUN set -x && \
         cd ~/ && \
 	git clone https://github.com/project-alice-assistant/ProjectAlice.git
 
-RUN set -x sudo pip3 install psutil
+RUN set -x && \
+        sudo pip3 install psutil
 
-RUN set -x sudo pip3 install pyyaml
+RUN set -x && \
+        sudo pip3 install pyyaml
 
-RUN set -x pip3 install toml
+RUN set -x && \
+        pip3 install toml
 
 ADD ./resources/ProjectAlice.yaml /boot/ProjectAlice.yaml
 
-RUN echo -e '#!/bin/bash\necho hello "$@" >> /services-to-start.config' > /usr/bin/systemctl && \
+RUN set -x && \
+        echo -e '#!/bin/bash\necho hello "$@" >> /services-to-start.config' > /usr/bin/systemctl && \
         chmod +x /usr/bin/systemctl
 
 RUN set -x && \
@@ -34,9 +41,11 @@ RUN set -x && \
 
 ADD ./resources/initializer.py /initializer.py
 
-RUN set -x pip3.7 install virtualenv
+RUN set -x && \
+        pip3.7 install virtualenv
 
-RUN set -x echo "alias python3='python3.7'\nalias pip='pip3.7'" >> ~/.bashrc
+RUN set -x && \
+        echo "alias python3='python3.7'\nalias pip='pip3.7'" >> ~/.bashrc
 
 RUN set -x && \
         cd ~/ProjectAlice/ && \
