@@ -12,7 +12,7 @@ jobs:
   multi:
     runs-on: ubuntu-latest
     steps:
-      - uses: project-alice-assistant/project-alice-docker@master
+      - uses: actions/checkout@master
       -
         name: Update Docker Hub Description
         uses: peter-evans/dockerhub-description@v2.4.0
