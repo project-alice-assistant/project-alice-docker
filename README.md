@@ -8,7 +8,7 @@ https://github.com/project-alice-assistant/project-alice-docker
 
 Project Alice is an open source, privacy-driven voice assistant, but here is not the best place to find out about what she can do.
 
-To find out all about Alice and what she can do, please see the mail website:
+To find out all about Alice and what she can do, please see the main website:
 
 https://docs.projectalice.io/
 
