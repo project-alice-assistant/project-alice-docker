@@ -4,7 +4,7 @@ on:
   push:
     branches: [ master ]
     paths:
-      - 'docker/**'
+      - 'docker-dev/**'
 
 jobs:
   multi:
@@ -38,7 +38,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./docker/
-          file: ./docker/Dockerfile.dev
+          file: ./docker-dev/Dockerfile.dev
           platforms: linux/amd64,linux/arm/v6,linux/arm/v7
           push: true
           tags: |
