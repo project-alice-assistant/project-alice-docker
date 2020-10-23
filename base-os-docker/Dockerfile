@@ -1,6 +1,6 @@
 FROM python:3.7-slim-buster
 
-#Change the timezone to your current timezone!!
+#Change the timezone to your current timezone!
 ENV TZ=Europe/London
 
 RUN set -x && \
