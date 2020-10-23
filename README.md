@@ -38,7 +38,7 @@ Alice's config.json file supports all sorted of magic that you may wish to chang
 ```
 ALICE_CONFIG_yourVariableName=YourValue
 ```
-You can also set sub-variables using the hyphen character (-), as follows:
+You can also set sub-variables using the hyphen character (_), as follows:
 ```
 ALICE_CONFIG_yourRootVariable_yourChildVariable_goForeverIfYouWant=YourValue
 ```
