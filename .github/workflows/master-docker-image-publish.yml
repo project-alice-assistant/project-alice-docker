@@ -43,3 +43,10 @@ jobs:
             assistantprojectalice/main-unit:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
+      -
+        name: Update Docker Hub Description
+        uses: peter-evans/dockerhub-description@v2.1.0
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
+          DOCKERHUB_REPOSITORY: assistantprojectalice/main-unit
