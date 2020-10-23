@@ -44,6 +44,16 @@ services:
     restart: unless-stopped
 ```
 
+## How to run the Beta
+
+This is very simple, just pull the dev tag as follows:
+
+```
+    image: assistantprojectalice/main-unit:dev
+```
+
+Congrats, you are now running the Beta.
+
 ## How to configure Alice
 
 Alice's config.json file supports all sorts of magic that you may wish to change, as such the Docker allows you to set any value you want inside the config file using the following environment variable format:
