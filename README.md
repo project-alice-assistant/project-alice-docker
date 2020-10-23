@@ -1,5 +1,9 @@
 # Project Alice's Docker
 
+The GitHub repository for this image can be found here:
+
+https://github.com/project-alice-assistant/project-alice-docker
+
 ## How to run Alice
 
 ### Headless
