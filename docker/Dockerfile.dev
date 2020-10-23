@@ -25,7 +25,7 @@ RUN set -x && \
 RUN set -x && \
         pip3 install toml
 
-ADD ./resources/ProjectAlice.yaml /boot/ProjectAlice.yaml
+ADD ./resources/ProjectAlice-dev.yaml /boot/ProjectAlice.yaml
 
 RUN set -x && \
         echo -e '#!/bin/bash\necho hello "$@" >> /services-to-start.config' > /usr/bin/systemctl && \
