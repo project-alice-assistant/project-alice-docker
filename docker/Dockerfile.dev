@@ -13,11 +13,6 @@ RUN set -x && \
         cd ~/ && \
 	git clone https://github.com/project-alice-assistant/ProjectAlice.git
 
-RUN set -x && \
-        cd ~/ProjectAlice && \
-        git checkout 1.0.0-b4 && \
-        git pull
-
 RUN set -x sudo pip3 install psutil
 
 RUN set -x sudo pip3 install pyyaml
@@ -52,6 +47,11 @@ RUN set -x && \
 ADD ./resources/start-alice.sh /start-alice.sh
 ADD ./resources/update-alice-config-from-environment-vars.sh /update-alice-config-from-environment-vars.sh
 ADD ./resources/systemctl /systemctl
+
+RUN set -x && \
+        cd ~/ProjectAlice && \
+        git checkout 1.0.0-b4 && \
+        git pull
 
 RUN set -x && \
         rm /usr/bin/systemctl -f && \
