@@ -34,7 +34,7 @@ services:
 
 ## How to configure Alice
 
-Alice's config.json file supports all sorts of magic that you may wish to change, as such the Docker allows you to set any value you want inside the config file using the following Environment variable format:
+Alice's config.json file supports all sorts of magic that you may wish to change, as such the Docker allows you to set any value you want inside the config file using the following environment variable format:
 ```
 ALICE_CONFIG_yourVariableName=YourValue
 ```
