@@ -1,4 +1,4 @@
-FROM python:3.7-buster
+FROM python:3.7-slim-buster
 
 #Change the timezone to your current timezone!!
 ENV TZ=Europe/London
@@ -10,7 +10,7 @@ RUN set -x && \
 	apt-get update && apt-get upgrade -y --allow-unauthenticated && apt-get dist-upgrade -y --allow-unauthenticated
 
 RUN set -x && \	
-	apt-get install -y git python3-toml
+	apt-get install -y git python3-toml gcc python3-dev wget
 
 RUN set -x && \
         cd ~/ && \
@@ -72,6 +72,11 @@ RUN set -x && \
         rm /usr/bin/systemctl -f && \
         mv /systemctl /usr/bin/systemctl && \
         chmod +x /usr/bin/systemctl
+
+RUN set -x && \
+        apt-get clean && \
+        apt-get -y auto-remove && \
+        rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN set -x && \
         cd /home && \
