@@ -1,6 +1,5 @@
 # Project Alice's Docker
 
-
 ## How to run Alice
 
 ### Headless
