@@ -40,6 +40,5 @@ RUN set -x && \
 
 ENV ALICE_CONFIG_updateChannel=$channelName
 ENV ALICE_CONFIG_skillUpdateChannel=$channelName
-TAG $channelName
 	
 CMD ["bash","/start-alice.sh"]
