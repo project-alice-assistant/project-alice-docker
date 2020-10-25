@@ -41,7 +41,10 @@ jobs:
           file: ./docker-dev/Dockerfile
           platforms: linux/amd64,linux/arm/v6,linux/arm/v7
           push: true
+          build-args: |
+            channelName=beta
+            tagName=1.0.0-b4
           tags: |
-            assistantprojectalice/main-unit:dev
+            assistantprojectalice/main-unit:1.0.0-b4
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
