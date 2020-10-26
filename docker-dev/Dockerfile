@@ -17,14 +17,14 @@ RUN set -x && \
 ADD ./resources/initializer.py /initializer.py
 
 RUN set -x && \
-        cd ~/ProjectAlice && \
-        git checkout $tagName && \
-        git pull
-
-RUN set -x && \
         cd ~/ProjectAlice/ && \
         cp /initializer.py ~/ProjectAlice/ && \
         ./venv/bin/python initializer.py
+
+RUN set -x && \
+        cd ~/ProjectAlice && \
+        git checkout $tagName && \
+        git pull
 
 ADD ./resources/start-alice.sh /start-alice.sh
 ADD ./resources/update-alice-config-from-environment-vars.sh /update-alice-config-from-environment-vars.sh
