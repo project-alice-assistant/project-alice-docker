@@ -105,4 +105,4 @@ In production we currently have the following platforms (which we hope to have w
 
 Note: If you want to try to add compatabilty for a new platform yourself, please feel free and post your working build into a branch for us to review.
 
-All help of welcome! :-)
+All help is welcome! :-)
