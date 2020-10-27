@@ -47,5 +47,6 @@ jobs:
             tagName=1.0.0-b4
           tags: |
             assistantprojectalice/main-unit:1.0.0-b4
+            assistantprojectalice/main-unit:dev
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
