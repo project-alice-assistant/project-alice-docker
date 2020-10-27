@@ -5,6 +5,7 @@ on:
     branches: [ master ]
     paths:
       - 'docker-dev/**'
+      - 'docker/resources/**'
 
 jobs:
   multi:
