@@ -7,25 +7,14 @@ RUN set -x && \
         ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN set -x && \
-        apt-get update && apt-get upgrade -y --allow-unauthenticated && apt-get dist-upgrade -y --allow-unauthenticated
+        sed -i -e's/ main/ main contrib non-free/g' /etc/apt/sources.list \
+        && apt-get update \
+        && apt-get upgrade -y --allow-unauthenticated \
+        && apt-get dist-upgrade -y --allow-unauthenticated \
+        && apt-get install -y git python3-toml gcc python3-dev wget sudo jq libttspico-utils
 
 RUN set -x && \
-        apt-get install -y git python3-toml gcc python3-dev wget sudo jq
-
-RUN set -x && \
-        pip3 install psutil
-
-RUN set -x && \
-        pip3 install pyyaml
-
-RUN set -x && \
-        pip3 install toml
-
-RUN set -x && \
-        pip3 install setuptools-rust
-
-RUN set -x && \
-        pip3 install virtualenv
+        pip3 install psutil pyyaml toml setuptools-rust virtualenv wheel
 
 RUN set -x && \
         echo "alias python3='python3.7'\nalias pip='pip3.7'" >> ~/.bashrc
