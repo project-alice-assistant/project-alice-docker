@@ -8,7 +8,7 @@ RUN set -x && \
 	git clone https://github.com/project-alice-assistant/ProjectAlice.git
         cd ~/ProjectAlice/ && \
         . ~/.bashrc && \
-        python3.7 main.py
+        python3.7 main.py && \
         cp /initializer.py ~/ProjectAlice/ && \
         ./venv/bin/python initializer.py && \
         cd /home && \
