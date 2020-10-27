@@ -40,6 +40,7 @@ RUN set -x && \
         cd /home && \
         ln -s /root root
 
+# Change the update channels
 ENV ALICE_CONFIG_updateChannel=$channelName
 ENV ALICE_CONFIG_skillUpdateChannel=$channelName
 
