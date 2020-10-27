@@ -5,7 +5,7 @@ ADD ./resources/initializer.py /initializer.py
 
 RUN set -x && \
         cd ~/ && \
-	git clone https://github.com/project-alice-assistant/ProjectAlice.git
+	git clone https://github.com/project-alice-assistant/ProjectAlice.git && \
         cd ~/ProjectAlice/ && \
         . ~/.bashrc && \
         python3.7 main.py && \
