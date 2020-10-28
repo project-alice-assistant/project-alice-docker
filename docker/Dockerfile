@@ -17,16 +17,10 @@ RUN set -x && \
 	git clone https://github.com/project-alice-assistant/ProjectAlice.git
 
 RUN set -x && \
-        apt-get install -y sudo
+        apt-get install -y sudo jq
 
 RUN set -x && \
-        sudo pip3 install psutil
-
-RUN set -x && \
-        sudo pip3 install pyyaml
-
-RUN set -x && \
-        pip3 install toml
+        sudo pip3 install psutil pyyaml toml
 
 ADD ./resources/ProjectAlice.yaml /boot/ProjectAlice.yaml
 
@@ -44,13 +38,7 @@ RUN set -x && \
 ADD ./resources/initializer.py /initializer.py
 
 RUN set -x && \
-        sudo pip3 install psutil
-        
-RUN set -x && \
-        sudo pip3 install pyyaml
-
-RUN set -x && \
-        pip3.7 install virtualenv
+        sudo pip3 install virtualenv
 
 RUN set -x && \
         echo "alias python3='python3.7'\nalias pip='pip3.7'" >> ~/.bashrc
@@ -60,9 +48,6 @@ RUN set -x && \
         cp /initializer.py ~/ProjectAlice/ && \
         ./venv/bin/python initializer.py && \
         cat /services-to-start.config
-
-RUN set -x && \
-        sudo apt-get install jq -y
 
 ADD ./resources/start-alice.sh /start-alice.sh
 ADD ./resources/update-alice-config-from-environment-vars.sh /update-alice-config-from-environment-vars.sh
@@ -83,6 +68,5 @@ RUN set -x && \
         ln -s /root root
 
 EXPOSE 1883/tcp
-
 
 CMD ["bash","/start-alice.sh"]
