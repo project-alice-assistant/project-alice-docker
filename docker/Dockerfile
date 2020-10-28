@@ -17,4 +17,5 @@ RUN set -x && \
 ADD ./resources/start-alice.sh /start-alice.sh
 ADD ./resources/update-alice-config-from-environment-vars.sh /update-alice-config-from-environment-vars.sh
 
+
 CMD ["bash","/start-alice.sh"]
