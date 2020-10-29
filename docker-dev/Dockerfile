@@ -41,7 +41,7 @@ RUN set -x && \
         ln -s /root root
 
 # Change the update channels
-ENV ALICE_CONFIG_updateChannel=$channelName
-ENV ALICE_CONFIG_skillUpdateChannel=$channelName
+ENV ALICE_CONFIG_aliceUpdateChannel=$channelName
+ENV ALICE_CONFIG_skillsUpdateChannel=$channelName
 
 CMD ["bash","/start-alice.sh"]
