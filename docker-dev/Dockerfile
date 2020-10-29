@@ -37,6 +37,7 @@ ADD ./resources/start-alice.sh /start-alice.sh
 ADD ./resources/update-alice-config-from-environment-vars.sh /update-alice-config-from-environment-vars.sh
 
 RUN set -x && \
+        chmod a+x /update-alice-config-from-environment-vars.sh && \
         cd /home && \
         ln -s /root root
 
