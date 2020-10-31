@@ -14,6 +14,7 @@ CONFIG_JSON=`cat ${CONFIG_FILE_PATH}`
 # Examples
 #  - ALICE_CONFIG_disableSoundAndMic=true
 #    disableSoundAndMic=true
+echo -e "Environmental Variables:"
 for P in `printenv | grep '^ALICE_CONFIG_'`
 do
   PROP_NAME=${P%%=*}
@@ -26,3 +27,4 @@ do
 done
 
 echo $CONFIG_JSON > $CONFIG_FILE_PATH
+echo ""

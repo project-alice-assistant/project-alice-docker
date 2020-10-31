@@ -6,6 +6,7 @@ FROM python:3.7-slim-buster
 
 #Change the timezone to your current timezone!
 ENV TZ=Europe/London
+ENV TERM=screen-256color
 
 RUN set -x && \
         ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -44,12 +45,13 @@ RUN set -x && \
         cp /initializer.py ~/ProjectAlice/ && \
         ./venv/bin/python initializer.py && \
         cd /home && \
-        ln -s /root root
-
+        ln -s /root root && \
+        mv ~/ProjectAlice ~/ProjectAliceBase && \
+        mkdir -p /root/ProjectAlice
 
 CMD ["bash","/start-alice.sh"]
 
 #Build & Test commands
  #docker build . --tag alice:latest --no-cache
- #docker run -it --name aa -e ALICE_CONFIG_disableSoundAndMic=true --net=host
  #docker run -it --name alice -e ALICE_CONFIG_disableSoundAndMic=true --net=host alice:latest
+ #docker run -v ~/docker/ProjectAlice:/root/ProjectAlice -it --name alice -e ALICE_CONFIG_disableSoundAndMic=true --net=host alice:latest
