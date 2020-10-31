@@ -1,43 +1,51 @@
-FROM wraithrmm/alice-base-os:latest
+FROM python:3.7-slim-buster
 
 ARG tagName=1.0.0-d4
 ARG channelName=beta
 
-RUN set -x && \
-        echo "deb http://deb.debian.org/debian buster main non-free" > /etc/apt/sources.list && \
-        apt-get update && apt-get upgrade -y --allow-unauthenticated && apt-get dist-upgrade -y --allow-unauthenticated
+#Speed up debugging with a bit of local caching
+#RUN echo 'Acquire {Retries "0";HTTP { Proxy "http://ha:8000"; }; };' >> /etc/apt/apt.conf.d/00squidproxy
+#RUN mkdir -p ~/.pip && echo [global] > ~/.pip/pip.conf && echo index-url = http://ha:3141/root/pypi/+simple/ >> ~/.pip/pip.conf && echo trusted-host = ha >> ~/.pip/pip.conf
+
+#Change the timezone to your current timezone!
+ENV TZ=Europe/London
 
 RUN set -x && \
-	apt-get install -y libttspico-utils
+        ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN set -x && \
-        cd ~/ && \
-	git clone https://github.com/project-alice-assistant/ProjectAlice.git
+        sed -i -e's/ main/ main contrib non-free/g' /etc/apt/sources.list \
+        && apt-get update \
+        && apt-get upgrade -y --allow-unauthenticated \
+        && apt-get dist-upgrade -y --allow-unauthenticated \
+        && apt-get install -y git python3-toml gcc python3-dev wget sudo jq libttspico-utils
+
+RUN set -x && \
+        pip3 install psutil pyyaml toml setuptools-rust virtualenv wheel
+
+RUN set -x && \
+        echo "alias python3='python3.7'\nalias pip='pip3.7'" >> ~/.bashrc
 
 ADD ./resources/ProjectAlice.yaml /boot/ProjectAlice.yaml
-
-RUN set -x && \
-        cd ~/ProjectAlice/ && \
-        . ~/.bashrc && \
-        python3.7 main.py
-
 ADD ./resources/initializer.py /initializer.py
-
-RUN set -x && \
-        cd ~/ProjectAlice/ && \
-        cp /initializer.py ~/ProjectAlice/ && \
-        ./venv/bin/python initializer.py
-
-RUN set -x && \
-        cd ~/ProjectAlice && \
-        git checkout $tagName && \
-        git pull
-
+ADD ./resources/systemctl /systemctl
 ADD ./resources/start-alice.sh /start-alice.sh
 ADD ./resources/update-alice-config-from-environment-vars.sh /update-alice-config-from-environment-vars.sh
 
 RUN set -x && \
-        chmod a+x /update-alice-config-from-environment-vars.sh && \
+        rm /usr/bin/systemctl -f && \
+        mv /systemctl /usr/bin/systemctl && \
+        chmod +x /usr/bin/systemctl && \
+        chmod +x /update-alice-config-from-environment-vars.sh
+
+RUN set -x && \
+        cd ~/ && \
+	git clone https://github.com/project-alice-assistant/ProjectAlice.git && \
+        cd ~/ProjectAlice/ && \
+        . ~/.bashrc && \
+        python3.7 main.py && \
+        cp /initializer.py ~/ProjectAlice/ && \
+        ./venv/bin/python initializer.py && \
         cd /home && \
         ln -s /root root
 
@@ -46,3 +54,7 @@ ENV ALICE_CONFIG_aliceUpdateChannel=$channelName
 ENV ALICE_CONFIG_skillsUpdateChannel=$channelName
 
 CMD ["bash","/start-alice.sh"]
+
+#Build & Test commands
+ #docker build . --tag alice:beta --no-cache
+ #docker run -it --name alice -e ALICE_CONFIG_disableSoundAndMic=true --net=host alice:beta
