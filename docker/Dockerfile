@@ -1,5 +1,8 @@
 FROM python:3.7-slim-buster
 
+ARG tagName=master
+ARG channelName=master
+
 #Speed up debugging with a bit of local caching
 #RUN echo 'Acquire {Retries "0";HTTP { Proxy "http://ha:8000"; }; };' >> /etc/apt/apt.conf.d/00squidproxy
 #RUN mkdir -p ~/.pip && echo [global] > ~/.pip/pip.conf && echo index-url = http://ha:3141/root/pypi/+simple/ >> ~/.pip/pip.conf && echo trusted-host = ha >> ~/.pip/pip.conf
@@ -44,10 +47,16 @@ RUN set -x && \
         python3.7 main.py && \
         cp /initializer.py ~/ProjectAlice/ && \
         ./venv/bin/python initializer.py && \
+        git checkout $tagName && \
+        git pull && \
         cd /home && \
         ln -s /root root && \
         mv ~/ProjectAlice ~/ProjectAliceBase && \
         mkdir -p /root/ProjectAlice
+
+# Change the update channels
+ENV ALICE_CONFIG_aliceUpdateChannel=$channelName
+ENV ALICE_CONFIG_skillsUpdateChannel=$channelName
 
 CMD ["bash","/start-alice.sh"]
 
