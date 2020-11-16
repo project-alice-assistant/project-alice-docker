@@ -26,6 +26,8 @@ services:
     image: assistantprojectalice/main-unit:latest
     container_name: alice-base
     network_mode: host
+    volumes:
+      - ~/docker/ProjectAlice:/root/ProjectAlice 
     environment:
       - ALICE_CONFIG_disableSoundAndMic=true
     restart: unless-stopped
@@ -50,7 +52,7 @@ Alice often has a range of working and developmental versions for you to try/use
 
 The different versions of Alice are made available using Image Tags, as detailed below.
 
-Ultimately, you can switch the version Alice is running from within the running cintainer if you wish, however to help try to provide a simpler deployment experience, see the following list of supported versions of Alice for you to take advantage of.
+Ultimately, you can switch the version Alice is running from within the running container if you wish, however to help try to provide a simpler deployment experience, see the following list of supported versions of Alice for you to take advantage of.
 
 Tag(s) | Alice Version | Status | Description
 ------------ | ------------- | ------------- | -------------
