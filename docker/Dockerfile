@@ -48,7 +48,6 @@ RUN set -x && \
         cp /initializer.py ~/ProjectAlice/ && \
         ./venv/bin/python initializer.py && \
         git checkout $tagName && \
-        git pull && \
         cd /home && \
         ln -s /root root && \
         mv ~/ProjectAlice ~/ProjectAliceBase && \
