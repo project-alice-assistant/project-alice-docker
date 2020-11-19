@@ -31,7 +31,7 @@ services:
     environment:
       - ALICE_CONFIG_disableSoundAndMic=true
       - ALICE_CONFIG_inputDevice="default"
-      - ALICE_CONFIG_outputDevice"="default"
+      - ALICE_CONFIG_outputDevice="default"
     restart: unless-stopped
     tty: true
     stdin_open: true
